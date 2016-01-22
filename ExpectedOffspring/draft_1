@@ -1,0 +1,39 @@
+import numpy as np
+
+file = open('./patientNumbers.txt')
+string = file.readline()
+numberList = string.split(' ')
+for i in range(len(numberList[:])):
+    numberList[i] = int(numberList[i].strip('\n'))
+##print numberList
+
+genotypes = [['AA', 'AA'], ['AA', 'Aa'], ['AA', 'aa'], \
+             ['Aa', 'Aa'], ['Aa', 'aa'], ['aa', 'aa']]
+
+statList = []
+for i in genotypes:
+    children = []
+    Dom = 0.0
+    for x in range(2):
+        children.append(i[0][x]+i[1][0])
+        children.append(i[0][x]+i[1][1])
+    for e in children:
+        if 'A' in e:
+            Dom += 1.0
+    statList.append( Dom/4.0)  
+##    print children
+##print statList
+
+statArray = np.array(statList)
+numArray = np.array(numberList)
+##print 'numArray: '+str(numArray)
+##print 'statArray: '+str(statArray)
+
+statArray *= numArray
+##print 'statArray*numArray: '+str(statArray)
+##print 'statArray.sum(): '+str(statArray.sum())
+##
+##print statArray.sum() / numArray.sum()
+
+print 'answer is: '+str(statArray.sum()*2)
+
