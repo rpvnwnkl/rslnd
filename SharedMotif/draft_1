@@ -1,0 +1,52 @@
+import random
+
+file = open('./haystack.txt')
+haystack = file.readlines()
+hayList = []
+for strawLayer in haystack:
+    if strawLayer[0] != '>':
+        hayList.append(strawLayer.strip('\n'))
+print hayList
+
+def stringSearcher(search, string):
+    if search in string:
+        return True
+    else:
+        return False
+
+def listSearcher(search, lists):
+    for item in lists:
+        if not stringSearcher(search, item):
+            return False
+    return True
+
+##i = 0
+searchTerm = hayList[0][0]
+bestString = ''
+for i in range(len(hayList[0])):
+    print 'beststring' +bestString
+    print 'i is at '+hayList[0][i]
+    
+    for e in range(1,len(hayList[0])-i+1):
+##        print 'e is at '+hayList[0][i+e]
+        
+        if listSearcher(hayList[0][i:i+e], hayList):
+            print 'found in them all: '+hayList[0][i:i+e]
+            
+            if len(hayList[0][i:i+e]) > len(bestString):
+                print 'yes, this one is longer: '+hayList[0][i:i+e]
+                
+                bestString = hayList[0][i:i+e]
+                print bestString
+        
+print bestString
+##searchItems = []
+##for i in range(len(hayList[0])):
+##    searchItems.append(hayList[0][i:])
+##    searchItems.append(hayList[0][:-i])
+##    searchItems.append(hayList[0][i:-i])
+##    searchItems.append(hayList[0][-i:i])
+##print searchItems
+##searchItems.sort(key = len)
+##print searchItems
+    
